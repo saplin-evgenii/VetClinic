@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: 'jetty'
 
 sourceCompatibility = 1.8
 
@@ -10,6 +11,15 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    springCoreVersion = '4.2.4.RELEASE'
+    springWebVersion = '4.2.4.RELEASE'
+    springWebMvcVersion = '4.2.4.RELEASE'
+}
+
 dependencies {
+    compile group: 'org.springframework', name: 'spring-core', version: springCoreVersion
+    compile group: 'org.springframework', name: 'spring-web', version: springWebVersion
+    compile group: 'org.springframework', name: 'spring-webmvc', version: springWebMvcVersion
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
