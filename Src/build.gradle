@@ -15,11 +15,23 @@ ext {
     springCoreVersion = '4.2.4.RELEASE'
     springWebVersion = '4.2.4.RELEASE'
     springWebMvcVersion = '4.2.4.RELEASE'
+    springTxVersion = '4.2.4.RELEASE'
+    springOrmVersion = '4.2.4.RELEASE'
+    springDataVersion = '1.8.0.RELEASE'
+    jpaVersion = '1.0.0.Final'
+    hibernateEntityManagerVersion = '4.3.10.Final'
+    postgresqlVersion = '9.3-1102-jdbc41'
 }
 
 dependencies {
     compile group: 'org.springframework', name: 'spring-core', version: springCoreVersion
     compile group: 'org.springframework', name: 'spring-web', version: springWebVersion
     compile group: 'org.springframework', name: 'spring-webmvc', version: springWebMvcVersion
+    compile group: 'org.springframework', name: 'spring-tx', version: springTxVersion
+    compile group: 'org.springframework', name: 'spring-orm', version: springOrmVersion
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: springDataVersion
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: jpaVersion
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: hibernateEntityManagerVersion
+    compile group: 'org.postgresql', name: 'postgresql', version: postgresqlVersion
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
