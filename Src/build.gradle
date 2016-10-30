@@ -4,6 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'jetty'
+apply plugin: 'groovy'
 
 sourceCompatibility = 1.8
 
@@ -23,6 +24,13 @@ ext {
     postgresqlVersion = '9.3-1102-jdbc41'
 }
 
+sourceSets {
+    main {
+        java { srcDirs = [] }
+        groovy { srcDirs = [ "src/main/java", "src/main/groovy" ] }
+    }
+}
+
 dependencies {
     compile group: 'org.springframework', name: 'spring-core', version: springCoreVersion
     compile group: 'org.springframework', name: 'spring-web', version: springWebVersion
@@ -33,5 +41,6 @@ dependencies {
     compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: jpaVersion
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: hibernateEntityManagerVersion
     compile group: 'org.postgresql', name: 'postgresql', version: postgresqlVersion
+    compile('org.codehaus.groovy:groovy-all:2.4.4')
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
