@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<pets id="1000000" name="test_cat_name_1" type="CAT"/>
+	<cats id="1000000"/>
+</dataset>
