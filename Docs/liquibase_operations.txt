@@ -1,0 +1,4 @@
+			     ГЕНЕРАЦИЯ CHANGESET'А
+<LIQ_HOME>/liquibase --driver=org.postgresql.Driver --classpath="<PATH_TO_LIQ_JAR>"  --changeLogFile="db.changelog-master.yml"  --url="jdbc:postgresql://localhost:5454/vetclinic"  --username=postgres  --password=postgres  generateChangeLog
+			 ВОССТАНОВЛЕНИЕ ИЗ CHANGELOG'А 
+<LIQ_HOME>/liquibase" --driver=org.postgresql.Driver  --classpath="<PATH_TO_LIQ_JAR>"  --changeLogFile="db.changelog-master.yml"  --url="jdbc:postgresql://localhost:5454/vetclinic"  --username=postgres  --password=postgres  update
