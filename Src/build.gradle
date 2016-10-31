@@ -23,6 +23,8 @@ ext {
     hibernateEntityManagerVersion = '4.3.10.Final'
     postgresqlVersion = '9.3-1102-jdbc41'
     liquibaseVersion = '3.4.1'
+    slf4jVersion = '1.7.13'
+    log4jVersion = '1.2.17'
 }
 
 sourceSets {
@@ -44,5 +46,7 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: postgresqlVersion
     compile('org.codehaus.groovy:groovy-all:2.4.4')
     compile group: 'org.liquibase', name: 'liquibase-core', version: liquibaseVersion
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: slf4jVersion
+    compile group: 'log4j', name: 'log4j', version: log4jVersion
 }
