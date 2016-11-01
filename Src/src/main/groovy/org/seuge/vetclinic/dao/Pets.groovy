@@ -10,4 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository
  * @since 1.0
  */
 interface Pets<PetType extends Pet> extends JpaRepository<PetType, Long> {
+
+    Collection<PetType> findByName(String name)
 }
