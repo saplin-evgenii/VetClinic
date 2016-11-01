@@ -1,0 +1,131 @@
+databaseChangeLog:
+- changeSet:
+    id: 1477920117021-1
+    author: Eugene (generated)
+    changes:
+    - createSequence:
+        sequenceName: hibernate_sequence
+- changeSet:
+    id: 1477920117021-2
+    author: Eugene (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: id
+            type: BIGINT
+        tableName: birds
+- changeSet:
+    id: 1477920117021-3
+    author: Eugene (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: id
+            type: BIGINT
+        tableName: cats
+- changeSet:
+    id: 1477920117021-4
+    author: Eugene (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: id
+            type: BIGINT
+        tableName: dogs
+- changeSet:
+    id: 1477920117021-5
+    author: Eugene (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              primaryKeyName: pet_id
+            name: id
+            type: BIGSERIAL
+        - column:
+            name: name
+            type: VARCHAR(64)
+        - column:
+            constraints:
+              nullable: false
+            name: type
+            type: VARCHAR
+        tableName: pets
+- changeSet:
+    id: 1477920117021-6
+    author: Eugene (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: bird_id
+        tableName: birds
+- changeSet:
+    id: 1477920117021-7
+    author: Eugene (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: cat_id
+        tableName: cats
+- changeSet:
+    id: 1477920117021-8
+    author: Eugene (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: id
+        constraintName: dog_id
+        tableName: dogs
+- changeSet:
+    id: 1477920117021-9
+    author: Eugene (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id
+        baseTableName: birds
+        constraintName: bird_id_pet_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: CASCADE
+        onUpdate: CASCADE
+        referencedColumnNames: id
+        referencedTableName: pets
+- changeSet:
+    id: 1477920117021-10
+    author: Eugene (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id
+        baseTableName: cats
+        constraintName: cat_id_pet_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: CASCADE
+        onUpdate: CASCADE
+        referencedColumnNames: id
+        referencedTableName: pets
+- changeSet:
+    id: 1477920117021-11
+    author: Eugene (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: id
+        baseTableName: dogs
+        constraintName: dog_id_pet_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: CASCADE
+        onUpdate: CASCADE
+        referencedColumnNames: id
+        referencedTableName: pets
