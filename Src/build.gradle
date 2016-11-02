@@ -29,6 +29,7 @@ ext {
     springTestVersion = '4.2.4.RELEASE'
     dbunitVersion = '2.4.9'
     testDbunitVersion = '1.2.0'
+    mockitoVersion = '1.9.5'
 }
 
 sourceSets {
@@ -57,4 +58,5 @@ dependencies {
     testCompile group: 'org.springframework', name: 'spring-test', version: springTestVersion
     testCompile group: 'org.dbunit', name: 'dbunit', version: dbunitVersion
     testCompile group: 'com.github.springtestdbunit', name: 'spring-test-dbunit', version: testDbunitVersion
+    testCompile group: 'org.mockito', name: 'mockito-all', version: mockitoVersion
 }
