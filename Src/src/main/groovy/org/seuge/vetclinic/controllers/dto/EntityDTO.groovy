@@ -9,5 +9,7 @@ import groovy.transform.Canonical
  * @since 1.0
  */
 @Canonical
-class BaseDTO {
+class EntityDTO {
+
+    Long id;
 }

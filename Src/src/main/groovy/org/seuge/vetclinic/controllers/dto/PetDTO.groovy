@@ -9,9 +9,7 @@ import groovy.transform.Canonical
  * @since 1.0
  */
 @Canonical
-class PetDTO extends BaseDTO {
-
-    Long id;
+class PetDTO extends EntityDTO {
 
     String name;
 }
