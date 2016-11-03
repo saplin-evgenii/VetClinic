@@ -19,8 +19,7 @@ import static org.seuge.vetclinic.controllers.util.ControllerConsts.ID_PATTERN;
  * @author Seuge
  * @since 1.0
  */
-//TODO: rename BaseDtoType
-public abstract class BaseApiController<EntityType extends Entity, BaseDtoType extends EntityDTO> {
+public abstract class BaseApiController<EntityType extends Entity, EntityDtoType extends EntityDTO> {
 
     protected static final String BASE_URL = "/api";
 
@@ -34,7 +33,7 @@ public abstract class BaseApiController<EntityType extends Entity, BaseDtoType e
      * @return response wrapper with entity updated with id
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<Long> createEntity(@RequestBody BaseDtoType entityDto) {
+    public ResponseEntity<Long> createEntity(@RequestBody EntityDtoType entityDto) {
         EntityType entity = dtoToEntity(entityDto, newEntity());
         EntityType entityCreated = crudService.create(entity);
         return new ResponseEntity<>(entityCreated.getId(), HttpStatus.CREATED);
@@ -47,8 +46,8 @@ public abstract class BaseApiController<EntityType extends Entity, BaseDtoType e
      * @return response wrapper with entity
      */
     @RequestMapping(value = "/{id:" + ID_PATTERN + "}", method = RequestMethod.GET)
-    public ResponseEntity<BaseDtoType> getEntityById(@PathVariable("id") long id) {
-        BaseDtoType entityDTO = entityToDto(crudService.getById(id), newDto());
+    public ResponseEntity<EntityDtoType> getEntityById(@PathVariable("id") long id) {
+        EntityDtoType entityDTO = entityToDto(crudService.getById(id), newDto());
         return new ResponseEntity<>(entityDTO, HttpStatus.OK);
     }
 
@@ -60,7 +59,7 @@ public abstract class BaseApiController<EntityType extends Entity, BaseDtoType e
      * @return response wrapper with entity updated with id
      */
     @RequestMapping(value = "/{id:" + ID_PATTERN + "}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateEntity(@PathVariable("id") long id, @RequestBody BaseDtoType entityDto) {
+    public ResponseEntity<?> updateEntity(@PathVariable("id") long id, @RequestBody EntityDtoType entityDto) {
         EntityType entity = dtoToEntity(entityDto, newEntity());
         crudService.updateById(id, entity);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -78,15 +77,15 @@ public abstract class BaseApiController<EntityType extends Entity, BaseDtoType e
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    protected abstract BaseDtoType newDto();
+    protected abstract EntityDtoType newDto();
 
-    protected BaseDtoType entityToDto(EntityType entity, BaseDtoType newDto) {
+    protected EntityDtoType entityToDto(EntityType entity, EntityDtoType newDto) {
         return newDto;
     }
 
     protected abstract EntityType newEntity();
 
-    protected EntityType dtoToEntity(BaseDtoType dto, EntityType newEntity) {
+    protected EntityType dtoToEntity(EntityDtoType dto, EntityType newEntity) {
         return newEntity;
     }
 }
