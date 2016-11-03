@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Root controller
- * Created by Seuge on 30.10.2016.
+ *
+ * @author Eugene
+ * @since 1.0
  */
 @Controller
 @RequestMapping("/")
@@ -14,6 +16,7 @@ public class IndexController {
 
     /**
      * Index page
+     *
      * @return page
      */
     @RequestMapping(method = RequestMethod.GET)

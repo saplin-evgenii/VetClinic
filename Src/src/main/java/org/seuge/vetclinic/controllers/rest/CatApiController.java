@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.seuge.vetclinic.controllers.rest.PetApiController.PETS_URL;
 
 /**
- *
+ * Cats REST API controller
  *
  * @author Seuge
  * @since 1.0

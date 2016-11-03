@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import static org.seuge.vetclinic.controllers.util.ControllerConsts.ID_PATTERN;
 
 /**
- *
+ * Base controller containing all REST API related logic
  *
  * @author Seuge
  * @since 1.0
@@ -25,6 +25,12 @@ public abstract class BaseApiController<Entity, BaseDtoType extends BaseDTO> {
     @Autowired
     private CrudService<Entity> crudService;
 
+    /**
+     * Returns entity with http 200 status by specified id
+     *
+     * @param id    id of entity to be returned
+     * @return      entity body
+     */
     @RequestMapping(value = "/{id:" + ID_PATTERN + "}", method = RequestMethod.GET)
     public ResponseEntity<BaseDtoType> getEntityById(@PathVariable("id") long id) {
         BaseDtoType entityDTO = entityToDto(crudService.getById(id), newDto());

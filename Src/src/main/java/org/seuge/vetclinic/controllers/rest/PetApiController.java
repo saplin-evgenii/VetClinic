@@ -1,11 +1,11 @@
 package org.seuge.vetclinic.controllers.rest;
 
-import org.seuge.vetclinic.controllers.dto.CatDTO;
 import org.seuge.vetclinic.controllers.dto.PetDTO;
-import org.seuge.vetclinic.entities.Cat;
 import org.seuge.vetclinic.entities.Pet;
 
 /**
+ * Pets REST API controller
+ *
  * @author Seuge
  * @since 1.0
  */

@@ -8,6 +8,9 @@ package org.seuge.vetclinic.controllers.util;
  */
 public final class ControllerConsts {
 
+    /**
+     * Regex expression "natural number or zero" for any entity ID
+     */
     public static final String ID_PATTERN = "\\d+";
 
     private ControllerConsts() {
