@@ -22,7 +22,7 @@ public class CatApiController extends PetApiController<Cat, CatDTO> {
     }
 
     @Override
-    protected Cat dtoToEntity(CatDTO o) {
-        return null;
+    protected Cat newEntity() {
+        return new Cat();
     }
 }

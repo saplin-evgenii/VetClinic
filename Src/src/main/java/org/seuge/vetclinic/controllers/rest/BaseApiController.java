@@ -1,11 +1,13 @@
 package org.seuge.vetclinic.controllers.rest;
 
-import org.seuge.vetclinic.controllers.dto.BaseDTO;
+import org.seuge.vetclinic.controllers.dto.EntityDTO;
+import org.seuge.vetclinic.entities.Entity;
 import org.seuge.vetclinic.services.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,19 +19,32 @@ import static org.seuge.vetclinic.controllers.util.ControllerConsts.ID_PATTERN;
  * @author Seuge
  * @since 1.0
  */
-//TODO: introduce Base class as the base entity for the controller and use it instead of Entity type parameter
-public abstract class BaseApiController<Entity, BaseDtoType extends BaseDTO> {
+//TODO: rename BaseDtoType
+public abstract class BaseApiController<EntityType extends Entity, BaseDtoType extends EntityDTO> {
 
     protected static final String BASE_URL = "/api";
 
     @Autowired
-    private CrudService<Entity> crudService;
+    private CrudService<EntityType> crudService;
 
     /**
-     * Returns entity with http 200 status by specified id
+     * Creates entity by specified prototype with 201 status ("created")
      *
-     * @param id    id of entity to be returned
-     * @return      entity body
+     * @param entityDto entity prototype
+     * @return response wrapper with entity updated with id
+     */
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public ResponseEntity<Long> createEntity(@RequestBody BaseDtoType entityDto) {
+        EntityType entity = dtoToEntity(entityDto, newEntity());
+        EntityType entityCreated = crudService.create(entity);
+        return new ResponseEntity<>(entityCreated.getId(), HttpStatus.CREATED);
+    }
+
+    /**
+     * Returns entity by specified id with http 200 status ("OK")
+     *
+     * @param id id of entity to be returned
+     * @return response wrapper with entity
      */
     @RequestMapping(value = "/{id:" + ID_PATTERN + "}", method = RequestMethod.GET)
     public ResponseEntity<BaseDtoType> getEntityById(@PathVariable("id") long id) {
@@ -37,11 +52,41 @@ public abstract class BaseApiController<Entity, BaseDtoType extends BaseDTO> {
         return new ResponseEntity<>(entityDTO, HttpStatus.OK);
     }
 
+    /**
+     * Updates entity with specified prototype's properties by specified id with 200 status ("OK")
+     *
+     * @param id        id of entity to be updated
+     * @param entityDto entity prototype (id is ignored)
+     * @return response wrapper with entity updated with id
+     */
+    @RequestMapping(value = "/{id:" + ID_PATTERN + "}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateEntity(@PathVariable("id") long id, @RequestBody BaseDtoType entityDto) {
+        EntityType entity = dtoToEntity(entityDto, newEntity());
+        crudService.updateById(id, entity);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * Deletes entity by specified id with http 204 status ("no content")
+     *
+     * @param id id of entity to be deleted
+     * @return response wrapper
+     */
+    @RequestMapping(value = "/{id:" + ID_PATTERN + "}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteEntityById(@PathVariable("id") long id) {
+        crudService.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     protected abstract BaseDtoType newDto();
 
-    protected BaseDtoType entityToDto(Entity entity, BaseDtoType newDto) {
+    protected BaseDtoType entityToDto(EntityType entity, BaseDtoType newDto) {
         return newDto;
     }
 
-    protected abstract Entity dtoToEntity(BaseDtoType dto);
+    protected abstract EntityType newEntity();
+
+    protected EntityType dtoToEntity(BaseDtoType dto, EntityType newEntity) {
+        return newEntity;
+    }
 }
