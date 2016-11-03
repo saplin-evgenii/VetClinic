@@ -23,7 +23,7 @@ public abstract class PetApiController<PetType extends Pet, PetDtoType extends P
     }
 
     @Override
-    protected Pet dtoToEntity(PetDTO o) {
+    protected PetType dtoToEntity(PetDTO o) {
         return null;
     }
 }
