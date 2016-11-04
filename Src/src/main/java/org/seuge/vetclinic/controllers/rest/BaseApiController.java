@@ -3,6 +3,7 @@ package org.seuge.vetclinic.controllers.rest;
 import org.seuge.vetclinic.controllers.dto.EntityDTO;
 import org.seuge.vetclinic.entities.Entity;
 import org.seuge.vetclinic.services.CrudService;
+import org.seuge.vetclinic.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,8 +47,12 @@ public abstract class BaseApiController<EntityType extends Entity, EntityDtoType
      * @return response wrapper with entity
      */
     @RequestMapping(value = "/{id:" + ID_PATTERN + "}", method = RequestMethod.GET)
-    public ResponseEntity<EntityDtoType> getEntityById(@PathVariable("id") long id) {
-        EntityDtoType entityDTO = entityToDto(crudService.getById(id), newDto());
+    public ResponseEntity<EntityDtoType> getEntityById(@PathVariable("id") long id) throws EntityNotFoundException {
+        EntityType entity = crudService.getById(id);
+        if (entity == null) {
+            throw new EntityNotFoundException("id", id);
+        }
+        EntityDtoType entityDTO = entityToDto(entity, newDto());
         return new ResponseEntity<>(entityDTO, HttpStatus.OK);
     }
 
@@ -59,7 +64,8 @@ public abstract class BaseApiController<EntityType extends Entity, EntityDtoType
      * @return response wrapper with entity updated with id
      */
     @RequestMapping(value = "/{id:" + ID_PATTERN + "}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateEntity(@PathVariable("id") long id, @RequestBody EntityDtoType entityDto) {
+    public ResponseEntity<?> updateEntity(@PathVariable("id") long id, @RequestBody EntityDtoType entityDto)
+            throws EntityNotFoundException {
         EntityType entity = dtoToEntity(entityDto, newEntity());
         crudService.updateById(id, entity);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -72,7 +78,7 @@ public abstract class BaseApiController<EntityType extends Entity, EntityDtoType
      * @return response wrapper
      */
     @RequestMapping(value = "/{id:" + ID_PATTERN + "}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteEntityById(@PathVariable("id") long id) {
+    public ResponseEntity<?> deleteEntityById(@PathVariable("id") long id) throws EntityNotFoundException {
         crudService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
