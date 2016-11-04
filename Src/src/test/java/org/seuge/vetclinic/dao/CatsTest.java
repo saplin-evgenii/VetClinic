@@ -42,7 +42,7 @@ public class CatsTest {
     @DatabaseSetup(type = DatabaseOperation.DELETE, value = "datasets/cats/deleteOne.xml")
     @DatabaseSetup(type = DatabaseOperation.INSERT, value = "datasets/cats/createOne.xml")
     @DatabaseTearDown(type = DatabaseOperation.DELETE, value = "datasets/cats/deleteOne.xml")
-    public void testAFindOne() throws Exception {
+    public void A_FindOne_ExistingCatId_CatWithThatId() throws Exception {
         Cat cat = cats.findOne(1_000_000L);
         assertNotNull("Cat not found:", cat);
         assertEquals("Cat ids do not match:", 1_000_000L, (long) cat.getId());
@@ -56,7 +56,7 @@ public class CatsTest {
     @DatabaseSetup(type = DatabaseOperation.DELETE, value = "datasets/cats/deleteOne.xml")
     @DatabaseSetup(type = DatabaseOperation.INSERT, value = "datasets/cats/createOne.xml")
     @DatabaseTearDown(type = DatabaseOperation.DELETE, value = "datasets/cats/deleteOne.xml")
-    public void testBFindByName() throws Exception {
+    public void B_FindByName_ExistingCatName_CatWithThatName() throws Exception {
         Collection<Cat> catsFound = cats.findByName("test_cat_name_1");
         assertFalse("No cat found by name:", catsFound.isEmpty());
         assertTrue("Cat with expected id not found:",
@@ -69,10 +69,10 @@ public class CatsTest {
     @Test(timeout = TestConsts.DEFAULT_TEST_TIMEOUT)
     @DatabaseSetup(type = DatabaseOperation.DELETE, value = "datasets/cats/deleteOne.xml")
     @DatabaseSetup(type = DatabaseOperation.INSERT, value = "datasets/cats/createOne.xml")
-    public void testCDelete() throws Exception {
+    public void C_Delete_ExistingCatId_CatWithThatIdNotExists() throws Exception {
         cats.delete(1_000_000L);
         // Tests are configured to run in order of declaration, so .findOne is expected to run properly after
-        // testAFindOne
+        // A_FindOne_ExistingCatId_CatWithThatId
         // TODO: find a way to introduce DBUnit check for deleted objects to make tests run independently
         Cat cat = cats.findOne(1_000_000L);
         assertNull("Deleted cat found:", cat);
@@ -82,13 +82,13 @@ public class CatsTest {
      * Save cat info
      */
     @Test(timeout = TestConsts.DEFAULT_TEST_TIMEOUT)
-    public void testDSave() throws Exception {
+    public void D_Save_CatWithRandomName_CatWithThatNameExistsAndOnlyOne() throws Exception {
         Cat newCat = new Cat();
         String catName = "test_cat_name_" + UUID.randomUUID().toString();
         newCat.setName(catName);
         cats.save(newCat);
         // Tests are configured to run in order of declaration, so .findByName and .delete is expected to run properly
-        // after testBFindByName and testCDelete
+        // after B_FindByName_ExistingCatName_CatWithThatName and C_Delete_ExistingCatId_CatWithThatIdNotExists
         // TODO: find a way to introduce DBUnit check for deleted objects to make tests run independently
         Collection<Cat> catsFound = cats.findByName(catName);
         assertFalse("Cat not found after save:", catsFound.isEmpty());
@@ -103,13 +103,13 @@ public class CatsTest {
     @DatabaseSetup(type = DatabaseOperation.DELETE, value = "datasets/cats/deleteOne.xml")
     @DatabaseSetup(type = DatabaseOperation.INSERT, value = "datasets/cats/createOne.xml")
     @DatabaseTearDown(type = DatabaseOperation.DELETE, value = "datasets/cats/deleteOne.xml")
-    public void testEUpdate() throws Exception {
+    public void E_Update_ExistingCatWithNewName_CatWithThatName() throws Exception {
         Cat cat = new Cat();
         cat.setId(1_000_000L);
         cat.setName("test_cat_name_1_updated");
         cats.save(cat);
         // Tests are configured to run in order of declaration, so .findOne is expected to run properly after
-        // testAFindOne
+        // A_FindOne_ExistingCatId_CatWithThatId
         // TODO: find a way to introduce DBUnit check for deleted objects to make tests run independently
         Cat updatedCat = cats.findOne(1_000_000L);
         assertNotNull("Cat not found:", updatedCat);
