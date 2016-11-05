@@ -5,6 +5,7 @@ import org.seuge.vetclinic.entities.Pet;
 import org.seuge.vetclinic.services.CrudService;
 import org.seuge.vetclinic.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -13,21 +14,21 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Seuge
  * @since 1.0
  */
+@Service
 @Transactional
-@SuppressWarnings("unchecked")
-public class CrudServiceDefaultImpl<EntityType extends Pet, EntityDao extends Pets> implements CrudService<EntityType> {
+public class CrudServiceDefaultImpl<EntityType extends Pet> implements CrudService<EntityType> {
 
     @Autowired
-    private EntityDao dao;
+    private Pets<EntityType> dao;
 
     @Override
     public EntityType create(EntityType entity) {
-        return (EntityType) dao.save(entity);
+        return dao.save(entity);
     }
 
     @Override
     public EntityType getById(long id) throws EntityNotFoundException {
-        EntityType entity = (EntityType) dao.findOne(id);
+        EntityType entity = dao.findOne(id);
         if (entity == null) {
             throw new EntityNotFoundException("id", id);
         }
@@ -40,7 +41,7 @@ public class CrudServiceDefaultImpl<EntityType extends Pet, EntityDao extends Pe
             throw new EntityNotFoundException("id", id);
         }
         entity.setId(id);
-        return (EntityType) dao.save(entity);
+        return dao.save(entity);
     }
 
     @Override
