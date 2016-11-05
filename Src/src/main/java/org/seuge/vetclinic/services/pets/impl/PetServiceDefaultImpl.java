@@ -4,6 +4,7 @@ import org.seuge.vetclinic.dao.Pets;
 import org.seuge.vetclinic.entities.Pet;
 import org.seuge.vetclinic.services.pets.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -12,27 +13,27 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Seuge
  * @since 1.0
  */
+@Service
 @Transactional
-@SuppressWarnings("unchecked")
-public class PetServiceDefaultImpl<PetType extends Pet, PetDao extends Pets> implements PetService<PetType, PetDao> {
+public class PetServiceDefaultImpl<PetType extends Pet> implements PetService<PetType> {
 
     @Autowired
-    private PetDao dao;
+    private Pets<PetType> dao;
 
     @Override
     public PetType create(PetType pet) {
-        return (PetType) dao.save(pet);
+        return dao.save(pet);
     }
 
     @Override
     public PetType getById(long id) {
-        return (PetType) dao.findOne(id);
+        return dao.findOne(id);
     }
 
     @Override
     public PetType updateById(long id, PetType pet) {
         pet.setId(id);
-        return (PetType) dao.save(pet);
+        return dao.save(pet);
     }
 
     @Override

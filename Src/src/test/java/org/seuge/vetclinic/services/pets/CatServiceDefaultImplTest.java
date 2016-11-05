@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.seuge.vetclinic.dao.Cats;
+import org.seuge.vetclinic.dao.Pets;
 import org.seuge.vetclinic.entities.Cat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,6 +20,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Default cat service impl unit tests
+ *
  * @author Seuge
  * @since 1.0
  */
@@ -30,10 +31,10 @@ public class CatServiceDefaultImplTest {
 
     @InjectMocks
     @Autowired
-    private CatService catService;
+    private PetService<Cat> catService;
 
     @Mock
-    private Cats cats;
+    private Pets<Cat> cats;
 
     @Before
     public void init() {

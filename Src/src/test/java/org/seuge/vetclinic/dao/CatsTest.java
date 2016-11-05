@@ -20,7 +20,11 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import java.util.Collection;
 import java.util.UUID;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/context/*Context.xml")
@@ -33,7 +37,7 @@ import static org.junit.Assert.*;
 public class CatsTest {
 
     @Autowired
-    private Cats cats;
+    private Pets<Cat> cats;
 
     /**
      * Find one cat by its id
