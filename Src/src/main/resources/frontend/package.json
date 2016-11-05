@@ -1,0 +1,14 @@
+{
+  "name": "vetclinic",
+  "version": "1.0.0",
+  "description": "Yet another VetClinic project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vetclinic"
+  ],
+  "author": "Seuge <saplinevgenii@gmail.com>",
+  "license": "UNLICENSED"
+}
