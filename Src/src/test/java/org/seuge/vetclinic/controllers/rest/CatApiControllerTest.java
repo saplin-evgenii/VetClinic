@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.seuge.vetclinic.entities.Cat;
-import org.seuge.vetclinic.services.pets.CatService;
+import org.seuge.vetclinic.services.CrudService;
 import org.seuge.vetclinic.util.JsonUtils;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
@@ -50,7 +50,7 @@ public class CatApiControllerTest {
     private CatApiController catApiController;
 
     @Mock
-    private CatService catService;
+    private CrudService<Cat> catService;
 
     private MockMvc mockMvc;
 
