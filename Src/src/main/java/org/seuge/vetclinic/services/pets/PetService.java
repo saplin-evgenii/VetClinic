@@ -5,7 +5,7 @@ import org.seuge.vetclinic.entities.Pet;
 import org.seuge.vetclinic.services.CrudService;
 
 /**
- * CRUD service
+ * Manipulations with pets
  *
  * @author Eugene
  * @since 1.0

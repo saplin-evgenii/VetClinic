@@ -4,7 +4,7 @@ import org.seuge.vetclinic.dao.Cats;
 import org.seuge.vetclinic.entities.Cat;
 
 /**
- * CRUD service
+ * Manipulations with cats
  *
  * @author Eugene
  * @since 1.0
