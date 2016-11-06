@@ -42,7 +42,7 @@ public class CatServiceDefaultImplTest {
     }
 
     @Test
-    public void testCreateCat() throws Exception {
+    public void create_NewCorrectCat_SameCatWithFilledId() throws Exception {
         long id = 1_000_000L;
         String name = "test_cat_name_1";
 
@@ -62,7 +62,7 @@ public class CatServiceDefaultImplTest {
     }
 
     @Test
-    public void testGetCatById() throws Exception {
+    public void getCatById_ExistingCatId_CatWithThatId() throws Exception {
         long id = 1_000_000L;
         String name = "test_cat_name_1";
 
@@ -79,7 +79,7 @@ public class CatServiceDefaultImplTest {
     }
 
     @Test
-    public void testUpdateCatById() throws Exception {
+    public void updateCatById_ExistingCatWithNewName_SameCatWithUpdatedName() throws Exception {
         long id = 1_000_000L;
         String name = "test_cat_name_1";
         String nameUpdated = "test_cat_name_1_updated";
