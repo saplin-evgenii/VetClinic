@@ -5,3 +5,5 @@ out
 target
 *.iml
 src/main/resources/frontend/node_modules
+src/main/resources/frontend/app/**/*.js
+src/main/resources/frontend/app/**/*.js.map
