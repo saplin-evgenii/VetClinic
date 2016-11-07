@@ -1,0 +1,3 @@
+Создание:
+
+curl -i -X POST -H "Content-Type: application/json" http://localhost:8080/VetClinic/api/pets/cats/ -d "{\"name\":\"test_cat\"}"
