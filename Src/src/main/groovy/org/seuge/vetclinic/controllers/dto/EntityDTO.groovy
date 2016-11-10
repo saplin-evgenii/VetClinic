@@ -9,7 +9,7 @@ import groovy.transform.Canonical
  * @since 1.0
  */
 @Canonical
-class EntityDTO {
+abstract class EntityDTO {
 
     Long id;
 }
