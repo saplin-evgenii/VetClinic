@@ -24,4 +24,9 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping(value = "/forbidden", method = RequestMethod.GET)
+    public String forbiddenPage() {
+        return "forbidden";
+    }
+
 }

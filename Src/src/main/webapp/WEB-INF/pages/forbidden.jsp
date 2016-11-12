@@ -11,6 +11,6 @@
         <title>VetClinic</title>
     </head>
     <body>
-        Index page
+        Access denied
     </body>
 </html>
